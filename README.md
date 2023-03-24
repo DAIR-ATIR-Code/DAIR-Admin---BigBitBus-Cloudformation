@@ -1,3 +1,3 @@
 # BigBitBus
 
-DAIR Repo for BigBitBus BoosterPack
+AWS Cloudformation Repo for BigBitBus BoosterPack
