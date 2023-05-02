@@ -1,5 +1,6 @@
 #!/bin/bash
-RELEASENAME="1.0.0"
+RELEASENAME="1.0.4"
+sudo apt-get update -y && sudo apt-get upgrade -y
 
 echo "microk8s-install"
 curl -L https://raw.githubusercontent.com/BigBitBusInc/kubernetes-automation-toolkit/$RELEASENAME/code/local-kubernetes-cluster-installation/install-microk8s-on-ubuntu.sh | bash | tee /var/log/bigbitbus-microk8s-install.log
