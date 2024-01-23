@@ -36,7 +36,6 @@
         "ConstraintDescription" : " Must use an existing Security Group in the default VPC"
       } 
   },
-
   "Mappings": {
     "OSType2AMI": {
         "ubuntu-20.04": {
@@ -83,21 +82,26 @@
 
                 "{",
 
-                "echo \"=======> DAIR BOOSTERPACK INSTALLATION IS STARTING <=======\"",
+                "echo \"echo '********** DAIR BoosterPack is currently being installed... Please wait !!! **********' \" >> \"/etc/profile.d/boosterpack.sh\"",
+
+                "echo \"=======> BIGBITBUS BOOSTERPACK INSTALLATION IS STARTING <=======\"",
                 "echo $(date)",
                 
                 "RELEASENAME=\"main\"",
 
                 "#Install application",
-                "curl -L -k \"https://code.cloud.canarie.ca:3000/shassan/BigBitBus/raw/$RELEASENAME/Workflow/remote_script.sh\" | bash &",
+                "curl -L -k \"https://raw.githubusercontent.com/DAIR-ATIR-Code/DAIR-Admin---BigBitBus-Cloudformation/main/Workflow/remote_script.sh\" | bash &",
                 "wait",
 
                 "#Config output",
-                "curl -L -k \"https://code.cloud.canarie.ca:3000/shassan/BigBitBus/raw/$RELEASENAME/Workflow/config_output.sh\" | bash &",
+                "curl -L -k \"https://raw.githubusercontent.com/DAIR-ATIR-Code/DAIR-Admin---BigBitBus-Cloudformation/main/Workflow/config_output.sh\" | bash &",
                 "wait",
 
-                "echo \"=======> DAIR BOOSTERPACK INSTALLATION IS COMPLETE <=======\"",
+                "echo \"=======> BIGBITBUS BOOSTERPACK INSTALLATION IS COMPLETE <=======\"",
                 "echo $(date)",
+
+                "sed -i '1d' \"/etc/profile.d/boosterpack.sh\"",
+                "echo \"echo '********** DAIR BoosterPack is installed !!! **********' \" >> \"/etc/profile.d/boosterpack.sh\"",
                 
                 "} >> /var/log/boosterpack.log 2>&1" 
                 
@@ -109,10 +113,6 @@
     }
   }, 
   "Outputs" : {
-    "InstanceID" : {
-        "Value" : { "Ref" : "AppServer" },
-        "Description" : "Application Server Instance ID"
-      },
     "IPAddress" : {
       "Value" : { "Fn::GetAtt" : [ "AppServer", "PublicIp" ]},
       "Description" : "Application Server IP Address"
